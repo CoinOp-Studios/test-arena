@@ -1,5 +1,5 @@
 import { ListItem } from '@chakra-ui/react';
-import { NetworkConfig } from '@raidguild/quiver';
+import type { NetworkConfig } from '@raidguild/quiver';
 import React from 'react';
 
 import Network from './Network';

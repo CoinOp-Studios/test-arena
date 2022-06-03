@@ -1,3 +1,4 @@
 import WalletButton from './WalletButton';
+import WalletStatusModal from './WalletStatusModal';
 
-export default WalletButton;
+export { WalletButton, WalletStatusModal };

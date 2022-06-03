@@ -1,41 +1,66 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  Box,
+  ChakraProvider,
+  Grid,
+  VStack,
+  theme,
+  useToast,
+} from '@chakra-ui/react';
+import { WalletProvider } from '@raidguild/quiver';
+import ethProvider from 'eth-provider';
+import * as React from 'react';
+import type { IProviderOptions } from 'web3modal';
 
-interface AppProps {}
+import { Header } from './components/Header';
+import { DEFAULT_CHAIN_ID, chains } from './config';
+import Routes from './routes';
 
-function App({}: AppProps) {
-  // Create the count state.
-  const [count, setCount] = useState(0);
-  // Create the counter (+1 every second).
-  useEffect(() => {
-    const timer = setTimeout(() => setCount(count + 1), 1000);
-    return () => clearTimeout(timer);
-  }, [count, setCount]);
-  // Return the App component.
+const providerOptions: IProviderOptions = {
+  frame: {
+    package: ethProvider,
+  },
+  // .. Other providers
+};
+
+const web3modalOptions = {
+  cacheProvider: true,
+  providerOptions,
+  theme: 'dark',
+};
+
+export default function App(): JSX.Element {
+  const toast = useToast();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <p>
-          Page has been open for <code>{count}</code> seconds.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
-    </div>
+    <ChakraProvider theme={theme}>
+      <WalletProvider
+        web3modalOptions={web3modalOptions}
+        networks={chains}
+        // Optional if you want to auto switch the network
+        defaultChainId={DEFAULT_CHAIN_ID}
+        // Optional but useful to handle events.
+        handleModalEvents={(eventName, error) => {
+          if (error) {
+            toast({
+              id: 'error',
+              title: 'Error',
+              description: error.message,
+              status: 'error',
+            });
+          }
+
+          console.log(eventName);
+        }}
+      >
+        <Box textAlign="center" fontSize="xl">
+          <Grid minH="100vh" p={3}>
+            <Header />
+
+            <VStack spacing={8}>
+              <Routes />
+            </VStack>
+          </Grid>
+        </Box>
+      </WalletProvider>
+    </ChakraProvider>
   );
 }
-
-export default App;
