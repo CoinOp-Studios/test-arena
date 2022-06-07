@@ -1,4 +1,4 @@
-import { NetworkConfig } from "@raidguild/quiver";
+import type { NetworkConfig } from "@raidguild/quiver";
 
 export const DEFAULT_CHAIN_ID = "0x13881"; // Used to switch to if the user is on an unsupported network
 
