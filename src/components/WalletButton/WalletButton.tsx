@@ -8,7 +8,7 @@ import WalletStatusModal from './WalletStatusModal';
 
 interface WalletProps {
 	icon: React.ReactNode;
-	variant: string;
+	variant?: string;
 	width?: string;
 	connectLabel?: string;
 	size?: string;
@@ -19,7 +19,7 @@ interface WalletProps {
 export default function WalletButton(props: WalletProps): JSX.Element {
 	const {
 		icon,
-		variant,
+		variant = 'solid',
 		width,
 		connectLabel = 'Connect',
 		size = 'md',

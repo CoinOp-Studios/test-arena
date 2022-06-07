@@ -11,6 +11,7 @@ import ethProvider from 'eth-provider';
 import * as React from 'react';
 import type { IProviderOptions } from 'web3modal';
 
+import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { DEFAULT_CHAIN_ID, chains } from './config';
 import Routes from './routes';
@@ -28,11 +29,10 @@ const web3modalOptions = {
   theme: 'dark',
 };
 
-export default function App(): JSX.Element {
+function Inner(): JSX.Element {
   const toast = useToast();
   return (
-    <ChakraProvider theme={theme}>
-      <WalletProvider
+    <WalletProvider
         web3modalOptions={web3modalOptions}
         networks={chains}
         // Optional if you want to auto switch the network
@@ -45,6 +45,7 @@ export default function App(): JSX.Element {
               title: 'Error',
               description: error.message,
               status: 'error',
+              position: 'top'
             });
           }
 
@@ -59,8 +60,16 @@ export default function App(): JSX.Element {
               <Routes />
             </VStack>
           </Grid>
+          <Footer />
         </Box>
       </WalletProvider>
+  );
+}
+
+export default function App(): JSX.Element {
+  return (
+    <ChakraProvider theme={theme}>
+      <Inner />
     </ChakraProvider>
   );
 }

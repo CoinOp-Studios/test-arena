@@ -14,6 +14,7 @@ import { useWallet } from '@raidguild/quiver';
 import React, { useCallback, useMemo } from 'react';
 
 import { getNetworkInfo } from '../../config';
+
 // import { getProviderInfo } from 'web3modal';
 
 
@@ -53,9 +54,8 @@ export default function WalletStatusModal(props: ModalProps): JSX.Element {
       <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
       <ModalContent
         top="0"
-        bgGradient="linear(180deg,#1F8CFD 0%, #7200E6 100%)"
         width="50%"
-        borderRadius="2em 0 2em 0"
+        borderRadius="lg"
       >
         <ModalHeader padding="0 2rem" height="4.5rem" maxHeight="4.5rem">
           <Flex
@@ -69,18 +69,18 @@ export default function WalletStatusModal(props: ModalProps): JSX.Element {
             lineHeight="2.5rem"
             marginTop="1.2rem"
           >
-            <Box fontSize="lg" color="white">
+            <Box fontSize="lg">
               Account
             </Box>
             <Spacer />
-            <ModalCloseButton top="25px" color="whitish" />
+            <ModalCloseButton top="25px" />
           </Flex>
         </ModalHeader>
-        <ModalBody color="white">
+        <ModalBody>
           <Box
             border="2px solid"
-            borderColor="#7077fe"
-            borderRadius="2em 0 2em 0"
+            borderColor="black"
+            borderRadius="lg"
             padding="1rem 2rem"
             mb="2rem"
           >
@@ -90,11 +90,10 @@ export default function WalletStatusModal(props: ModalProps): JSX.Element {
               <Button
                 variant="outline"
                 bgColor="transparent"
-                border="1px solid"
-                borderColor="blue5"
+                border="1px solid #000"
                 borderRadius="2em"
                 _hover={{
-                  bgColor: 'purple',
+                  bgColor: 'gray.400',
                 }}
                 onClick={handleChange}
               >

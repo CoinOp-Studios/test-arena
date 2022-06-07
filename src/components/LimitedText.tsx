@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface LimitedTextProps {
 	text: string,
 	maxLength: number,
